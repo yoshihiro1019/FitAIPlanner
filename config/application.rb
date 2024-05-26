@@ -33,12 +33,11 @@ module V3BasicRailsBasic
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-  end
-end
-config.generators do |g|
-  g.controller do |c|
-    c.helper false
-    c.test_framework nil
-    c.skip_routes true
+    config.generators do |g|
+ 
+      g.helper false
+      g.test_framework nil
+      g.skip_routes true
+    end
   end
 end
