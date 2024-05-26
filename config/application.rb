@@ -35,3 +35,10 @@ module V3BasicRailsBasic
     config.generators.system_tests = nil
   end
 end
+config.generators do |g|
+  g.controller do |c|
+    c.helper false
+    c.test_framework nil
+    c.skip_routes true
+  end
+end
