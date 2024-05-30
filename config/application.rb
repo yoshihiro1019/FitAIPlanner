@@ -39,5 +39,7 @@ module V3BasicRailsBasic
       g.test_framework nil
       g.skip_routes true
     end
+
+    config.i18n.default_locale = :ja
   end
 end
