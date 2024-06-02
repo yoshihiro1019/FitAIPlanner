@@ -13,7 +13,7 @@
         <li class='nav-item dropdown dropdown-slide'>
           <%= link_to t('header.board'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'>
-            <%= link_to t('header.board_index'), '#', class: 'dropdown-item' %>
+            <%= link_to t('header.board_index'), boards_path, class: 'dropdown-item' %>
             <%= link_to t('header.create_board'), '#', class: 'dropdown-item' %>
           </div>
         </li>
