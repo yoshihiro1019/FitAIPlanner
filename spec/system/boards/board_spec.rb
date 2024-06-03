@@ -46,5 +46,40 @@ RSpec.describe '掲示板', type: :system do
         end
       end
     end
+    describe '掲示板の作成' do
+      context 'ログインしていない場合' do
+        it 'ログインページにリダイレクトされること' do
+          visit '/boards/new'
+          Capybara.assert_current_path("/login", ignore_query: true)
+          expect(current_path).to eq('/login'), 'ログインしていない場合、掲示板作成画面にアクセスした際に、ログインページにリダイレクトされていません'
+          expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
+        end
+      end
+
+      context 'ログインしている場合' do
+        before do
+          login_as(user)
+          click_on('掲示板')
+          click_on('掲示板作成')
+        end
+
+        it '掲示板が作成できること' do
+          fill_in 'タイトル', with: 'テストタイトル'
+          fill_in '本文', with: 'テスト本文'
+          click_button '登録'
+          Capybara.assert_current_path("/boards", ignore_query: true)
+          expect(current_path).to eq('/boards'), '掲示板一覧画面に遷移していません'
+          expect(page).to have_content('掲示板を作成しました'), 'フラッシュメッセージ「掲示板を作成しました」が表示されていません'
+          expect(page).to have_content('テストタイトル'), '作成した掲示板のタイトルが表示されていません'
+          expect(page).to have_content('テスト本文'), '作成した掲示板の本文が表示されていません'
+        end
+
+        it '掲示板の作成に失敗すること' do
+          fill_in 'タイトル', with: 'テストタイトル'
+          click_button '登録'
+          expect(page).to have_content('掲示板を作成出来ませんでした'), 'フラッシュメッセージ「掲示板を作成出来ませんでした」が表示されていません'
+        end
+      end
+    end
   end
 end
