@@ -78,6 +78,7 @@ RSpec.describe '掲示板', type: :system do
           fill_in 'タイトル', with: 'テストタイトル'
           click_button '登録'
           expect(page).to have_content('掲示板を作成出来ませんでした'), 'フラッシュメッセージ「掲示板を作成出来ませんでした」が表示されていません'
+          expect(page).to have_content('本文を入力してください'), 'エラーメッセージ「本文を入力してください」が表示されていません'
         end
       end
     end
