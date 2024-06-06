@@ -66,6 +66,8 @@ RSpec.describe '掲示板', type: :system do
         it '掲示板が作成できること' do
           fill_in 'タイトル', with: 'テストタイトル'
           fill_in '本文', with: 'テスト本文'
+          file_path = Rails.root.join('spec', 'fixtures', 'example.jpg')
+          attach_file "サムネイル", file_path
           click_button '登録'
           Capybara.assert_current_path("/boards", ignore_query: true)
           expect(current_path).to eq('/boards'), '掲示板一覧画面に遷移していません'
@@ -76,6 +78,8 @@ RSpec.describe '掲示板', type: :system do
 
         it '掲示板の作成に失敗すること' do
           fill_in 'タイトル', with: 'テストタイトル'
+          file_path = Rails.root.join('spec', 'fixtures', 'example.txt')
+          attach_file "サムネイル", file_path
           click_button '登録'
           expect(page).to have_content('掲示板を作成出来ませんでした'), 'フラッシュメッセージ「掲示板を作成出来ませんでした」が表示されていません'
           expect(page).to have_content('本文を入力してください'), 'エラーメッセージ「本文を入力してください」が表示されていません'
