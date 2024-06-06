@@ -1,7 +1,11 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div id="board-id-<%= board.id %>">
     <div class="card">
-      <%= image_tag "board_placeholder.png", class: "card-img-top", width: "300", height:"200" %>
+     <% if board.board_image? %>
+       <%= image_tag board.board_image.url, class: "card-img-top", width: "300", height:"200" %>
+    <% else %>
+        <%= image_tag "board_placeholder.png", class: "card-img-top", width: "300", height:"200" %>
+    <% end %>
       <div class="card-body">
         <div class="d-flex">
           <h4 class="card-title">
@@ -20,7 +24,7 @@
           <li><i class="bi bi-person"></i><%= board.user.decorate.full_name %></li>
           <li><i class="bi bi-calendar"></i><%= l board.created_at, format: :short %></li>
         </ul>
-        <p class="card-text">本文</p>
+        <p class="card-text"><%= board.body %></p>
       </div>
     </div>
   </div>
