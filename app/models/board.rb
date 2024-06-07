@@ -5,6 +5,8 @@ class Board < ApplicationRecord
 
   belongs_to :user
   validate :board_image_type
+  
+  has_many :comments, dependent: :destroy
 
   private
 

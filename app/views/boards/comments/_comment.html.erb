@@ -1,0 +1,13 @@
+<div class="comment">
+  <div class="comment-header">
+    <%= image_tag "sample_avatar.png", alt: "avatar", class: "avatar" %>
+    <span class="comment-user"><%= comment.user.full_name %></span>
+  </div>
+  <div class="comment-body">
+    <%= simple_format(comment.body) %>
+  </div>
+  <% if comment.user == current_user %>
+    <%= link_to '編集', edit_comment_path(comment), class: "btn btn-sm btn-secondary" %>
+    <%= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger" %>
+  <% end %>
+</div>

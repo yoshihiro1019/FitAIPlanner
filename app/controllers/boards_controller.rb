@@ -3,6 +3,11 @@ class BoardsController < ApplicationController
     @boards = Board.includes(:user)
   end
 
+  def show
+    # URLパラメーターから掲示板のIDを取得
+    @board = Board.find(params[:id])
+  end
+  
   def new
     @board = Board.new
   end

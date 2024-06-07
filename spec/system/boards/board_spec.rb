@@ -46,6 +46,34 @@ RSpec.describe '掲示板', type: :system do
         end
       end
     end
+    describe '掲示板の詳細' do
+      context 'ログインしていない場合' do
+        it 'ログインページにリダイレクトされること' do
+          visit board_path(board)
+          expect(current_path).to eq login_path
+          expect(page).to have_content 'ログインしてください'
+        end
+      end
+
+      context 'ログインしている場合' do
+        before do
+          board
+          login_as(user)
+        end
+        it '掲示板の詳細が表示されること' do
+          click_on('掲示板')
+          click_on('掲示板一覧')
+          within "#board-id-#{board.id}" do
+            page.find_link(board.title, exact_text: true).click
+          end
+          Capybara.assert_current_path("/boards/#{board.id}", ignore_query: true)
+          expect(current_path).to eq("/boards/#{board.id}"), '掲示板のタイトルリンクから掲示板詳細画面へ遷移できません'
+          expect(page).to have_content board.title
+          expect(page).to have_content board.user.decorate.full_name
+          expect(page).to have_content board.body
+        end
+      end
+    end
     describe '掲示板の作成' do
       context 'ログインしていない場合' do
         it 'ログインページにリダイレクトされること' do

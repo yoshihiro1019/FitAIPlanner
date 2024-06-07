@@ -9,13 +9,13 @@
       <div class="card-body">
         <div class="d-flex">
           <h4 class="card-title">
-            <%= link_to board.title, '#' %>
+            <%= link_to board.title, board_path(board) %>
           </h4>
           <div class='ms-auto'>
-            <%= link_to '#', id: 'button-edit-#{board.id}' do %>
+            <%= link_to "#", id: "button-dit-25" do %>
               <i class="bi bi-pencil-fill"></i>
             <% end %>
-            <%= link_to '#', id: 'button-delete-#{board.id}', method: :delete, data: {confirm: ''} do %>
+            <%= link_to "#", id: "button-delete-25" do %>
               <i class="bi bi-trash-fill"></i>
             <% end %>
           </div>
