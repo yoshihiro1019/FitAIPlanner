@@ -1,13 +1,33 @@
-<div class="comment">
-  <div class="comment-header">
-    <%= image_tag "sample_avatar.png", alt: "avatar", class: "avatar" %>
-    <span class="comment-user"><%= comment.user.full_name %></span>
-  </div>
-  <div class="comment-body">
-    <%= simple_format(comment.body) %>
-  </div>
-  <% if comment.user == current_user %>
-    <%= link_to '編集', edit_comment_path(comment), class: "btn btn-sm btn-secondary" %>
-    <%= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger" %>
-  <% end %>
-</div>
+<tbody id="table-comment">
+          <% @board.comments.order(created_at: :desc).each do |comment| %>
+            <!-- 表示されているコメントのIDが入るように調整 -->
+            <tr id="comment-<%= comment.id %>">
+              <td style="width: 60px">
+                <!-- image_tagを使う形に修正 -->
+                <%= image_tag "sample.jpg", class: "rounded-circle", width: 50, height: 50 %>
+              </td>
+              <td>
+                <h3 class="small"><%= comment.user.full_name %></h3>
+                <p><%= simple_format(comment.body) %></p>
+              </td>
+              <td class="action">
+                <ul class="list-inline justify-content-center" style="float: right;">
+                  <% if comment.user == current_user %>
+                    <li class="list-inline-item">
+                      <!-- link_toを使う形に修正 -->
+                       <%= link_to edit_comment_path(comment), class: 'edit-comment-link' do %>
+                        <i class='bi bi-pencil-fill'></i>
+                      <% end %>
+                    </li>
+                    <li class="list-inline-item">
+                      <!-- link_toを使う形に修正 -->
+                      <%= link_to comment, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'delete-comment-link' do %>
+                        <i class="bi bi-trash-fill"></i>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>

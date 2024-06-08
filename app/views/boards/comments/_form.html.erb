@@ -1,7 +1,8 @@
-<%= form_with(model: [ @board, @board.comments.build ], local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :body %>
-      <%= form.text_area :body, class: "form-control" %>
-    </div>
-    <%= form.submit "コメントを投稿する", class: "btn btn-primary" %>
-  <% end %>
+<!-- form_withを使う形に修正 -->
+      <%= form_with(model: [ @board, @board.comments.build ], local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :body, "コメント" %>
+          <%= form.text_area :body, class: "form-control mb-3", rows: 4, placeholder: "コメント" %>
+        </div>
+        <%= form.submit "投稿", class: "btn btn-primary" %>
+      <% end %>

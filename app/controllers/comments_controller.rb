@@ -2,14 +2,14 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
   before_action :set_board, only: [:create]
   before_action :require_login, only: %i[create update destroy]
-
+  add_flash_types :success, :danger
   def create
     @comment = @board.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
       flash[:success] = I18n.t('comments.create_success')
     else
-      flash[:alert] = I18n.t('comments.create_failure')
+      flash[:danger] = I18n.t('comments.create_failure')
     end
     redirect_to @board
   end
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       flash[:notice] = t('comments.create_success')
       redirect_to @comment.board
     else
-      flash[:alert] = t('comments.update_failure')
+      flash[:danger] = t('comments.update_failure')
       render :edit
     end
   end
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       flash[:notice] = I18n.t('comments.destroy_success')
     else
-      flash[:alert] = I18n.t('comments.destroy_failure')
+      flash[:danger] = I18n.t('comments.destroy_failure')
     end
     redirect_to @comment.board
   end

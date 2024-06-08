@@ -36,14 +36,7 @@
   <!-- コメントフォーム -->
   <div class="row mb-3" id="comment-form">
     <div class="col-lg-8 offset-lg-2">
-      <!-- form_withを使う形に修正 -->
-      <%= form_with(model: [ @board, @board.comments.build ], local: true) do |form| %>
-        <div class="form-group">
-          <%= form.label :body, "コメント" %>
-          <%= form.text_area :body, class: "form-control mb-3", rows: 4, placeholder: "コメント" %>
-        </div>
-        <%= form.submit "投稿", class: "btn btn-primary" %>
-      <% end %>
+      <%= render  "boards/comments/form" %>
     </div>
   </div>
 
@@ -51,39 +44,7 @@
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <table class="table">
-        <tbody id="table-comment">
-          <% @board.comments.order(created_at: :desc).each do |comment| %>
-            <!-- 表示されているコメントのIDが入るように調整 -->
-            <tr id="comment-<%= comment.id %>">
-              <td style="width: 60px">
-                <!-- image_tagを使う形に修正 -->
-                <%= image_tag "sample.jpg", class: "rounded-circle", width: 50, height: 50 %>
-              </td>
-              <td>
-                <h3 class="small"><%= comment.user.full_name %></h3>
-                <p><%= simple_format(comment.body) %></p>
-              </td>
-              <td class="action">
-                <ul class="list-inline justify-content-center" style="float: right;">
-                  <% if comment.user == current_user %>
-                    <li class="list-inline-item">
-                      <!-- link_toを使う形に修正 -->
-                       <%= link_to edit_comment_path(comment), class: 'edit-comment-link' do %>
-                        <i class='bi bi-pencil-fill'></i>
-                      <% end %>
-                    </li>
-                    <li class="list-inline-item">
-                      <!-- link_toを使う形に修正 -->
-                      <%= link_to comment, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'delete-comment-link' do %>
-                        <i class="bi bi-trash-fill"></i>
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
+      <%= render "boards/comments/comment" %>
       </table>
     </div>
   </div>
