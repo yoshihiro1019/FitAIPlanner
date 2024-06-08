@@ -48,3 +48,6 @@ ja:
     update_failure: 'コメントを更新できませんでした'
     destroy_success: 'コメントを削除しました'
     destroy_failure: 'コメントの削除に失敗しました'
+  time:
+    formats:
+      created: "%Y/%m/%d %H:%M"

@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
   def show
     # URLパラメーターから掲示板のIDを取得
     @board = Board.find(params[:id])
+    @user = @board.user
   end
 
   def new

@@ -13,8 +13,8 @@
             <div class='col-md-9'>
               <h3 style='display: inline;'><%= @board.title %></h3>
               <ul class="list-inline">
-                <li class="list-inline-item">by 小野 凛</li>
-                <li class="list-inline-item">2019/05/09 17:11</li>
+                <li class="list-inline-item"><%= @user.full_name %></li>
+                <li class="list-inline-item"><%= l @board.created_at, format: :created %></li>
               </ul>
                 <div class='d-flex justify-content-end'>
                 <!-- link_toを使う形に修正 -->
@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-          <p>本文３２</p>
+          <p><%= @board.body %></p>
         </div>
       </article>
     </div>

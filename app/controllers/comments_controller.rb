@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     else
       flash[:alert] = I18n.t('comments.create_failure')
     end
-      redirect_to @board
+    redirect_to @board
   end
 
   def edit; end
