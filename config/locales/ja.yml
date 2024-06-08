@@ -41,3 +41,10 @@ ja:
   boards:
     new:
       title: 掲示板作成
+  comments:
+    create_success: 'コメントを作成しました'
+    create_failure: 'コメントを作成できませんでした'
+    update_success: 'コメントを更新しました'
+    update_failure: 'コメントを更新できませんでした'
+    destroy_success: 'コメントを削除しました'
+    destroy_failure: 'コメントの削除に失敗しました'

@@ -1,17 +1,16 @@
 class CommentsController < ApplicationController
-  
   before_action :set_comment, only: %i[edit update destroy]
   before_action :set_board, only: [:create]
-  before_action :require_login, only: [:create, :update, :destroy]
+  before_action :require_login, only: %i[create update destroy]
 
   def create
     @comment = @board.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:success] = 'コメントを作成しました'
+      flash[:success] = I18n.t('comments.create_success')
       redirect_to @board
     else
-      flash[:alert] = 'コメントを作成出来ませんでした'
+      flash[:alert] = I18n.t('comments.create_failure')
       redirect_to @board
     end
   end
@@ -20,17 +19,20 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      flash[:notice] = 'コメントを更新しました'
+      flash[:notice] = t('comments.create_success')
       redirect_to @comment.board
     else
-      flash[:alert] = 'コメントを更新出来ませんでした'
+      flash[:alert] = t('comments.update_failure')
       render :edit
     end
   end
 
   def destroy
-    @comment.destroy
-    flash[:notice] = 'コメントを削除しました'
+    if @comment.destroy
+      flash[:notice] = I18n.t('comments.destroy_success')
+    else
+      flash[:alert] = I18n.t('comments.destroy_failure')
+    end
     redirect_to @comment.board
   end
 
