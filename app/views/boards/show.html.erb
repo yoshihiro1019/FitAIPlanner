@@ -89,25 +89,3 @@
   </div>
 </div>
 
-<div class="row mb-3" id="comment-form">
-    <div class="col-lg-8 offset-lg-2">
-    <%= form_with(model: [ @board, @board.comments.build ], local: true) do |form| %>
-        <div class="form-group">
-          <%= form.label :body, "コメント" %>
-          <%= form.text_area :body, class: "form-control mb-3", rows: 4, placeholder: "コメント" %>
-        </div>
-        <%= form.submit "投稿", class: "btn btn-primary" %>
-      <% end %>
-
-  <div class="row">
-  <div class="col-lg-8 offset-lg-2">
-    <table class="table">
-      <% if @comments.present? %>
-          <%= render @comment %>
-      <% else %>
-        <div class="mb-3"></div>
-      <% end %>
-    </table>
-  </div>
-</div>
-</div> 
