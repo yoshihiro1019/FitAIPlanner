@@ -68,7 +68,7 @@
                   <% if comment.user == current_user %>
                     <li class="list-inline-item">
                       <!-- link_toを使う形に修正 -->
-                      <%= link_to edit_comment_path(comment), class: 'edit-comment-link' do %>
+                       <%= link_to edit_comment_path(comment), class: 'edit-comment-link' do %>
                         <i class='bi bi-pencil-fill'></i>
                       <% end %>
                     </li>

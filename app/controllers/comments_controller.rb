@@ -1,13 +1,14 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  
   before_action :set_comment, only: %i[edit update destroy]
   before_action :set_board, only: [:create]
+  before_action :require_login, only: [:create, :update, :destroy]
 
   def create
     @comment = @board.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:notice] = 'コメントを作成しました'
+      flash[:success] = 'コメントを作成しました'
       redirect_to @board
     else
       flash[:alert] = 'コメントを作成出来ませんでした'
