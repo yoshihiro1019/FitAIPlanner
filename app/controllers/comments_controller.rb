@@ -8,11 +8,10 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       flash[:success] = I18n.t('comments.create_success')
-      redirect_to @board
     else
       flash[:alert] = I18n.t('comments.create_failure')
-      redirect_to @board
     end
+      redirect_to @board
   end
 
   def edit; end
