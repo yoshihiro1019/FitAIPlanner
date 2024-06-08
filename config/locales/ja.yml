@@ -43,7 +43,7 @@ ja:
       title: 掲示板作成
   comments:
     create_success: 'コメントを作成しました'
-    create_failure: 'コメントを作成できませんでした'
+    create_failure: 'コメントを作成出来ませんでした'
     update_success: 'コメントを更新しました'
     update_failure: 'コメントを更新できませんでした'
     destroy_success: 'コメントを削除しました'
