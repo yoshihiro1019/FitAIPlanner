@@ -24,6 +24,13 @@ RSpec.describe '掲示板', type: :system do
           expect(current_path).to eq('/boards'), 'ヘッダーのリンクから掲示板一覧画面へ遷移できません'
         end
 
+        it '正しいタイトルが表示されていること' do
+          login_as(user)
+          click_on('掲示板')
+          click_on('掲示板一覧')
+          expect(page).to have_title("掲示板一覧 | RUNTEQ BOARD APP"), '掲示板一覧ページのタイトルに「掲示板一覧 | RUNTEQ BOARD APP」が含まれていません。'
+        end
+
         context '掲示板が一件もない場合' do
           it '何もない旨のメッセージが表示されること' do
             login_as(user)
@@ -72,6 +79,14 @@ RSpec.describe '掲示板', type: :system do
           expect(page).to have_content board.user.decorate.full_name
           expect(page).to have_content board.body
         end
+        it '正しいタイトルが表示されていること' do
+          click_on('掲示板')
+          click_on('掲示板一覧')
+          within "#board-id-#{board.id}" do
+            page.find_link(board.title, exact_text: true).click
+          end
+          expect(page).to have_title("#{board.title} | RUNTEQ BOARD APP"), '掲示板詳細ページのタイトルに掲示板のタイトルが含まれていません。'
+        end
       end
     end
     describe '掲示板の作成' do
@@ -89,6 +104,10 @@ RSpec.describe '掲示板', type: :system do
           login_as(user)
           click_on('掲示板')
           click_on('掲示板作成')
+        end
+
+        it '正しいタイトルが表示されていること' do
+          expect(page).to have_title("掲示板作成 | RUNTEQ BOARD APP"), '掲示板新規作成ページのタイトルに「掲示板作成 | RUNTEQ BOARD APP」が含まれていません。'
         end
 
         it '掲示板が作成できること' do

@@ -16,6 +16,12 @@ RSpec.describe '共通系', type: :system do
         expect(page).to have_content('Copyright'), '「Copyright」というテキストが表示されていません'
       end
     end
+
+    describe 'タイトル' do
+     it 'タイトルが正しく表示されていること' do
+        expect(page).to have_title("RUNTEQ BOARD APP"), 'トップページのタイトルに「RUNTEQ BOARD APP」が含まれていません。'
+      end
+    end
   end
 
   context 'ログイン後' do
@@ -35,6 +41,11 @@ RSpec.describe '共通系', type: :system do
         find('#header-profile').click
         expect(page).to have_content('プロフィール'), 'ヘッダーに「プロフィール」というテキストが表示されていません'
         expect(page).to have_content('ログアウト'), 'ヘッダーに「ログアウト」というテキストが表示されていません'
+      end
+    end
+    describe 'タイトル' do
+     it 'タイトルが正しく表示されていること' do
+        expect(page).to have_title("RUNTEQ BOARD APP"), 'トップページのタイトルに「RUNTEQ BOARD APP」が含まれていません。'
       end
     end
   end
