@@ -43,10 +43,10 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      flash[:success] = '掲示板を更新しました'
+      flash[:success] = t('flash.success.board_updated')
       redirect_to @board
     else
-      flash.now[:alert] = '掲示板を更新出来ませんでした。'
+      flash.now[:alert] = t('flash.success.board_updated')
       render :edit
     end
   end
@@ -64,8 +64,8 @@ class BoardsController < ApplicationController
   end
 
   def authorize_user!
-    if @board.user != current_user
-      raise ActiveRecord::RecordNotFound
-    end
+    return unless @board.user != current_user
+
+    raise ActiveRecord::RecordNotFound
   end
 end
