@@ -74,10 +74,8 @@ class BoardsController < ApplicationController
   
   
   def authorize_user!
-    return unless logged_in?
-
-    
-    redirect_to board_path(@board), alert: '他人の掲示板を編集することはできません。' unless @board.user == current_user
-
+    if @board.user != current_user
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end
