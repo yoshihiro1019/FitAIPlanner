@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[show edit update destroy]
+  before_action :set_board, only: %i[edit update destroy]
+  before_action :set_board_for_show, only: %i[show]
   before_action :authorize_user!, only: %i[edit update destroy]
 
   def index
@@ -44,6 +45,10 @@ class BoardsController < ApplicationController
   private
 
   def set_board
+    @board = current_user.boards.find(params[:id])
+  end
+
+  def set_board_for_show
     @board = Board.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to boards_path, alert: t('flash.alert.not_found')
@@ -54,8 +59,6 @@ class BoardsController < ApplicationController
   end
 
   def authorize_user!
-    return if @board.user == current_user
-
-    raise ActiveRecord::RecordNotFound
+    raise ActiveRecord::RecordNotFound unless @board.user == current_user
   end
 end
