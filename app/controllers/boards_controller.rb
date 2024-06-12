@@ -56,7 +56,7 @@ class BoardsController < ApplicationController
   def set_board
     @board = Board.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to boards_path, alert: '指定された掲示板が見つかりませんでした。'
+    redirect_to boards_path, alert: t('flash.alert.not_found')
   end
 
   def board_params
@@ -64,7 +64,7 @@ class BoardsController < ApplicationController
   end
 
   def authorize_user!
-    return unless @board.user != current_user
+    return if @board.user != current_user
 
     raise ActiveRecord::RecordNotFound
   end
