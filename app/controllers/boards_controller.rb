@@ -1,8 +1,7 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
-  
-  
+  before_action :set_board, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[edit update destroy]
+
   def index
     @boards = Board.includes(:user)
   end
@@ -22,7 +21,6 @@ class BoardsController < ApplicationController
     authorize_user!
   end
 
-
   def create
     @board = current_user.boards.build(board_params)
     if @board.save
@@ -33,12 +31,6 @@ class BoardsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  
-
-
-
-  
 
   def destroy
     @board = Board.find(params[:id])
@@ -62,17 +54,15 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board =Board.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to boards_path, alert: '指定された掲示板が見つかりませんでした。'
+    @board = Board.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to boards_path, alert: '指定された掲示板が見つかりませんでした。'
   end
 
   def board_params
     params.require(:board).permit(:title, :body, :board_image)
   end
 
-  
-  
   def authorize_user!
     if @board.user != current_user
       raise ActiveRecord::RecordNotFound
