@@ -33,8 +33,8 @@ class BoardsController < ApplicationController
       flash[:success] = t('flash.success.board_updated')
       redirect_to @board
     else
-      flash.now[:alert] = t('flash.alert.board_not_updated')
-      render :edit
+      flash.now[:danger] = t('flash.alert.board_not_updated')
+      render :edit, status: :unprocessable_entity
     end
   end
 
