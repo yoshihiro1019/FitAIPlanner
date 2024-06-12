@@ -47,12 +47,15 @@ class BoardsController < ApplicationController
 
   def set_board
     @board = current_user.boards.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to boards_path, alert: t('flash.alert.not_found')
   end
 
   def set_board_for_show
-    @board = Board.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to boards_path, alert: t('flash.alert.not_found')
+    @board = Board.where(id: params[:id]).first
+    if @board.nil? || (!current_user.boards.exists?(id: @board.id) && !@board.user_id == current_user.id)
+      redirect_to boards_path, alert: t('flash.alert.not_found')
+    end
   end
 
   def board_params
