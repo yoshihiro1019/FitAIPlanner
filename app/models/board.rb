@@ -7,6 +7,7 @@ class Board < ApplicationRecord
   validate :board_image_type
 
   has_many :comments, dependent: :destroy
+  has_one_attached :board_image
 
   private
 

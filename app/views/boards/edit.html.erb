@@ -1,24 +1,29 @@
-<% title "掲示板編集"  %>
+<% title "掲示板編集" %>
 <div class="container">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
-      <h1>掲示板編集 </h1>
+      <h1>掲示板編集</h1>
       <%= form_with model: @board, class: "edit_board", local: true do |f| %>
-      <%= render 'board_error_messages', model: @board, form: f %>
+        <%= render 'board_error_messages', model: @board, form: f %>
         <div class="mb-3">
           <%= f.label :title, t('board.title') %>
           <%= f.text_field :title, class: "form-control", id: "board_title" %>
         </div>
         <div class="mb-3">
           <%= f.label :body, t('board.body') %>
-          <%= f.text_area :body, class: "form-control", style: "height: 200px", row: "10", id: "board_body" %>
+          <%= f.text_area :body, class: "form-control", style: "height: 200px", rows: "10", id: "board_body" %>
         </div>
         <div class="mb-3">
           <%= f.label :board_image %>
           <%= f.file_field :board_image, class: "form-control", id: "board_board_image" %>
           <%= f.hidden_field :board_image_cache %>
         </div>
-        <%= f.submit t('helpers.submit.update'), class: "btn btn-primary",data: {disable_with: t('helpers.submit.update')} %>
+        <% if @board.board_image.present? %>
+          <div class="field">
+            <%= image_tag @board.board_image.url, size: "300x300" %>
+          </div>
+        <% end %>
+        <%= f.submit t('helpers.submit.update'), class: "btn btn-primary", data: { disable_with: t('helpers.submit.update') } %>
       <% end %>
     </div>
   </div>

@@ -38,10 +38,7 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.destroy
-    respond_to do |format|
-      format.html { redirect_to boards_url, success: '投稿が削除されました。' }
-      format.json { head :no_content }
-    end
+    redirect_to boards_url, success: '投稿が削除されました。'
   end
 
   private
