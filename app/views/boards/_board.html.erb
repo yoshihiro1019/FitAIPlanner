@@ -19,9 +19,10 @@
             <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete  } do %>
               <i class="bi bi-trash-fill"></i>
             <% end %>
-            <% end %>
+            
           </div>
-           
+           <% end %>
+            
         </div>
         <ul class="list-inline">
           <li><i class="bi bi-person"></i><%= board.user.decorate.full_name %></li>
