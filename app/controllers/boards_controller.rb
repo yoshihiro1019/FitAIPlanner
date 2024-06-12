@@ -2,6 +2,7 @@ class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
   
+  
   def index
     @boards = Board.includes(:user)
   end
@@ -18,6 +19,7 @@ class BoardsController < ApplicationController
 
   def edit
     @board = Board.find(params[:id])
+    authorize_user!
   end
 
 
@@ -32,9 +34,9 @@ class BoardsController < ApplicationController
     end
   end
 
-  def set_board
-    @board = Board.find(params[:id])
-  end
+  
+
+
 
   
 
@@ -42,14 +44,15 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @board.destroy
     respond_to do |format|
-      format.html { redirect_to boards_url, notice: '投稿が削除されました。' }
+      format.html { redirect_to boards_url, success: '投稿が削除されました。' }
       format.json { head :no_content }
     end
   end
 
   def update
     if @board.update(board_params)
-      redirect_to @board, notice: '掲示板を更新しました'
+      flash[:success] = '掲示板を更新しました'
+      redirect_to @board
     else
       flash.now[:alert] = '掲示板を更新出来ませんでした。'
       render :edit
@@ -59,15 +62,22 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board = current_user.boards.find(params[:id])
+    @board =Board.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to boards_path, alert: '指定された掲示板が見つかりませんでした。'
   end
 
   def board_params
     params.require(:board).permit(:title, :body, :board_image)
   end
 
+  
+  
   def authorize_user!
-    @board = Board.find(params[:id])
-    raise ActiveRecord::RecordNotFound unless @board.user == current_user
+    return unless logged_in?
+
+    
+    redirect_to board_path(@board), alert: '他人の掲示板を編集することはできません。' unless @board.user == current_user
+
   end
 end

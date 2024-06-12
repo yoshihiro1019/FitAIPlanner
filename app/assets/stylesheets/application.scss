@@ -1,2 +1,10 @@
 @import 'application.bootstrap';
 @import 'top';
+.notice {
+    color: green;
+    background-color: #e0ffe0;
+    border: 1px solid green;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
