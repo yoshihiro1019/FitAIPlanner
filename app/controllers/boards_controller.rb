@@ -9,6 +9,7 @@ class BoardsController < ApplicationController
 
   def show
     @user = @board.user
+    render :show, locals: { board: @board }
   end
 
   def new

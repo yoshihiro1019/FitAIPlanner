@@ -6,11 +6,11 @@
       <%= form_with model: @board, class: "edit_board", local: true do |f| %>
         <%= render 'board_error_messages', model: @board, form: f %>
         <div class="mb-3">
-          <%= f.label :title, t('board.title') %>
+          <%= f.label :title, t('boards.title') %>
           <%= f.text_field :title, class: "form-control", id: "board_title" %>
         </div>
         <div class="mb-3">
-          <%= f.label :body, t('board.body') %>
+          <%= f.label :body, t('boards.body') %>
           <%= f.text_area :body, class: "form-control", style: "height: 200px", rows: "10", id: "board_body" %>
         </div>
         <div class="mb-3">

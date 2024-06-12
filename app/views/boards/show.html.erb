@@ -1,4 +1,4 @@
-<% title @board.title %>
+<% title board.title %>
 <div class="container pt-5">
   <div class="row mb-3">
     <div class="col-lg-8 offset-lg-2">
@@ -7,31 +7,31 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-3'>
-              <% if @board.board_image.present? %>
-                <%= image_tag @board.board_image.url, class: "card-img-top img-fluid", width: 300, height: 200 %>
+              <% if board.board_image.present? %>
+                <%= image_tag board.board_image.url, class: "card-img-top img-fluid", width: 300, height: 200 %>
               <% else %>
                 <%= image_tag "sample.jpg", class: "card-img-top img-fluid", width: 300, height: 200 %>
               <% end %>
             </div>
             <div class='col-md-9'>
-              <h3 style='display: inline;'><%= @board.title %></h3>
+              <h3 style='display: inline;'><%= board.title %></h3>
               <ul class="list-inline">
                 <li class="list-inline-item">by <%= @user.full_name %></li>
-                <li class="list-inline-item"><%= l @board.created_at, format: :created %></li>
+                <li class="list-inline-item"><%= l board.created_at, format: :created %></li>
               </ul>
               <div class='d-flex justify-content-end'>
-                <% if current_user == @board.user %>
-                  <%= link_to edit_board_path(@board), id: "button-edit-#{@board.id}" do %>
-                    <i class='bi bi-pencil-fill'></i>
+                <% if current_user == board.user %>
+                  <%= link_to edit_board_path(board), id: "button-edit-#{board.id}" do %>
+                    <i class='bi bi-pencil-fill'></i> 
                   <% end %>
-                  <%= link_to board_path(@board), id: "button-delete-#{@board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
-                    <i class="bi bi-trash-fill"></i>
+                  <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
+                    <i class="bi bi-trash-fill"></i> 
                   <% end %>
                 <% end %>
               </div>
             </div>
           </div>
-          <p><%= @board.body %></p>
+          <p><%= board.body %></p>
         </div>
       </article>
     </div>
