@@ -1,7 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[edit update destroy]
   before_action :set_board_for_show, only: %i[show]
-  before_action :authorize_user!, only: %i[edit update destroy]
 
   def index
     @boards = Board.includes(:user)
@@ -40,29 +39,23 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.destroy
-    redirect_to boards_url, success: '投稿が削除されました。', status: :see_other
+    redirect_to boards_url, success: '掲示板を削除しました', status: :see_other
   end
 
   private
 
   def set_board
     @board = current_user.boards.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to boards_path, alert: t('flash.alert.not_found')
   end
 
   def set_board_for_show
-    @board = Board.where(id: params[:id]).first
-    if @board.nil? || (!current_user.boards.exists?(id: @board.id) && !@board.user_id == current_user.id)
-      redirect_to boards_path, alert: t('flash.alert.not_found')
-    end
+    @board = Board.find(params[:id])
+    return if @board.present? && (@board.user == current_user || !current_user.boards.exists?(id: @board.id))
+
+    redirect_to boards_path, alert: t('flash.alert.not_found')
   end
 
   def board_params
     params.require(:board).permit(:title, :body, :board_image)
-  end
-
-  def authorize_user!
-    raise ActiveRecord::RecordNotFound unless @board.user == current_user
   end
 end
