@@ -40,7 +40,7 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.destroy
-    redirect_to boards_url, success: '投稿が削除されました。'
+    redirect_to boards_url, success: '投稿が削除されました。', status: :see_other
   end
 
   private
