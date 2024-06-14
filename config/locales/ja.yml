@@ -63,3 +63,6 @@ ja:
     alert:
       board_not_updated: '掲示板を更新出来ませんでした'
       not_found: '指定された掲示板が見つかりませんでした'
+  notices:
+    bookmark_created: "ブックマークしました"
+    bookmark_destroyed: "ブックマークを外しました"

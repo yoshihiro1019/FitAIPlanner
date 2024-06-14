@@ -14,11 +14,45 @@
   <% if @bookmarks.empty? %>
     <p>ブックマーク中の掲示板がありません</p>
   <% else %>
-    <div class="list-group">
+    <div class="row">
       <% @bookmarks.each do |bookmark| %>
-        <a href="<%= board_path(bookmark.board) %>" class="list-group-item list-group-item-action">
-          <%= bookmark.board.title %>
-        </a>
+        <div class="col-sm-12 col-lg-4 mb-3">
+          <div id="board-id-<%= bookmark.board.id %>">
+            <div class="card">
+              <% if bookmark.board.board_image? %>
+                <%= image_tag bookmark.board.board_image.url, class: "card-img-top", width: "300", height:"200" %>
+              <% else %>
+                <%= image_tag "board_placeholder.png", class: "card-img-top", width: "300", height:"200" %>
+              <% end %>
+              <div class="card-body">
+                <div class="d-flex">
+                  <h4 class="card-title">
+                    <%= link_to bookmark.board.title, board_path(bookmark.board) %>
+                  </h4>
+                  <% if current_user == bookmark.board.user %>
+                    <div class='ms-auto'>
+                      <%= link_to edit_board_path(bookmark.board), id: "button-edit-#{bookmark.board.id}" do %>
+                        <i class="bi bi-pencil-fill"></i>
+                      <% end %>
+                      <%= link_to board_path(bookmark.board), id: "button-delete-#{bookmark.board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
+                        <i class="bi bi-trash-fill"></i>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class='ms-auto'>
+                      <%= render 'bookmarks/bookmark_button', board: bookmark.board %>
+                    </div>
+                  <% end %>
+                </div>
+                <ul class="list-inline">
+                  <li><i class="bi bi-person"></i><%= bookmark.board.user.decorate.full_name %></li>
+                  <li><i class="bi bi-calendar"></i><%= l bookmark.board.created_at, format: :short %></li>
+                </ul>
+                <p class="card-text"><%= bookmark.board.body %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
   <% end %>
