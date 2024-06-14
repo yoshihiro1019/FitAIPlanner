@@ -20,6 +20,7 @@
                 <li class="list-inline-item"><%= l board.created_at, format: :created %></li>
               </ul>
               <div class='d-flex justify-content-end'>
+                <%= render 'bookmarks/bookmark_button', board: board %>
                 <% if current_user == board.user %>
                   <%= link_to edit_board_path(board), id: "button-edit-#{board.id}" do %>
                     <i class='bi bi-pencil-fill'></i> 
@@ -53,4 +54,6 @@
     </div>
   </div>
 </div>
+
+
 

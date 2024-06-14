@@ -184,7 +184,7 @@ RSpec.describe '掲示板', type: :system do
     describe '掲示板の削除' do
       before { board }
       context '自分の掲示板' do
-        it '掲示板が削除できること', js: true do
+        it '掲示板が削除できること' do
           login_as(user)
           visit '/boards'
           page.accept_confirm { find("#button-delete-#{board.id}").click }
@@ -198,6 +198,31 @@ RSpec.describe '掲示板', type: :system do
           login_as(another_user)
           visit boards_path
           expect(page).not_to have_selector("#button-delete-#{board.id}"), '他人の掲示板に対して削除ボタンが表示されています'
+        end
+      end
+    end
+    describe '掲示板のブックマーク一覧' do
+      before { board }
+      context '1件もブックマークしていない場合' do
+        it '1件もない旨のメッセージが表示されること' do
+          login_as(user)
+          visit boards_path
+          click_on 'ブックマーク一覧'
+          Capybara.assert_current_path("/boards/bookmarks", ignore_query: true)
+          expect(current_path).to eq(bookmarks_boards_path), '課題で指定した形式のリンク先に遷移させてください'
+          expect(page).to have_content('ブックマーク中の掲示板がありません'), 'ブックマーク中の掲示板が一件もない場合、「ブックマーク中の掲示板がありません」というメッセージが表示されていません'
+        end
+      end
+
+      context 'ブックマークしている場合' do
+        it 'ブックマークした掲示板が表示されること' do
+          login_as(another_user)
+          visit boards_path
+          find("#bookmark-button-for-board-#{board.id}").click
+          click_on 'ブックマーク一覧'
+          Capybara.assert_current_path("/boards/bookmarks", ignore_query: true)
+          expect(current_path).to eq(bookmarks_boards_path), '課題で指定した形式のリンク先に遷移させてください'
+          expect(page).to have_content board.title
         end
       end
     end

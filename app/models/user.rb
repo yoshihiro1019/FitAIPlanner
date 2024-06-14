@@ -9,7 +9,21 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   has_many :boards, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_boards, through: :bookmarks, source: :board
   def full_name
     "#{last_name} #{first_name}"
+  end
+
+  def bookmarked?(board)
+    bookmarked_boards.include?(board)
+  end
+
+  def bookmark(board)
+    bookmarks.create(board:)
+  end
+
+  def unbookmark(board)
+    bookmarks.find_by(board:).destroy
   end
 end

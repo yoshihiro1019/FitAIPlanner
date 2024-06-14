@@ -1,0 +1,25 @@
+<% title 'ブックマーク一覧' %>
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <!-- 検索フォーム -->
+      <%= form_with url: bookmarks_boards_path, method: :get, local: true, class: "input-group mb-3" do %>
+        <%= text_field_tag :search, params[:search], placeholder: "検索ワード", class: "form-control" %>
+        <div class="input-group-append">
+          <%= submit_tag "検索", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if @bookmarks.empty? %>
+    <p>ブックマーク中の掲示板がありません</p>
+  <% else %>
+    <div class="list-group">
+      <% @bookmarks.each do |bookmark| %>
+        <a href="<%= board_path(bookmark.board) %>" class="list-group-item list-group-item-action">
+          <%= bookmark.board.title %>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+</div>

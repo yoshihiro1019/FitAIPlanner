@@ -5,10 +5,10 @@ class Board < ApplicationRecord
 
   belongs_to :user
   validate :board_image_type
-
+  has_many :bookmarks, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one_attached :board_image
-
+  has_many :bookmarking_users, through: :bookmarks, source: :user
   private
 
   def board_image_type

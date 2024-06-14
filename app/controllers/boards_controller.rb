@@ -4,6 +4,7 @@ class BoardsController < ApplicationController
 
   def index
     @boards = Board.includes(:user)
+    @bookmarks = current_user.bookmarks.includes(:board) if logged_in?
   end
 
   def show
