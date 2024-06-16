@@ -18,7 +18,9 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmarks = current_user.bookmarks.includes(:board)
-    return unless params[:search].present?
+    if params[:search].blank?
+      return
+    end
 
     @bookmarks = @bookmarks.joins(:board).where('boards.title LIKE ?', "%#{params[:search]}%")
   end
