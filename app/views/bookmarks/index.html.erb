@@ -2,58 +2,23 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col-lg-10 offset-lg-1">
-      <!-- 検索フォーム -->
-      <%= form_with url: bookmarks_boards_path, method: :get, local: true, class: "input-group mb-3" do %>
-        <%= text_field_tag :search, params[:search], placeholder: "検索ワード", class: "form-control" %>
-        <div class="input-group-append">
-          <%= submit_tag "検索", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <% if @bookmarks.empty? %>
-    <p>ブックマーク中の掲示板がありません</p>
-  <% else %>
-    <div class="row">
-      <% @bookmarks.each do |bookmark| %>
-        <div class="col-sm-12 col-lg-4 mb-3">
-          <div id="board-id-<%= bookmark.board.id %>">
-            <div class="card">
-              <% if bookmark.board.board_image? %>
-                <%= image_tag bookmark.board.board_image.url, class: "card-img-top", width: "300", height:"200" %>
-              <% else %>
-                <%= image_tag "board_placeholder.png", class: "card-img-top", width: "300", height:"200" %>
-              <% end %>
-              <div class="card-body">
-                <div class="d-flex">
-                  <h4 class="card-title">
-                    <%= link_to bookmark.board.title, board_path(bookmark.board) %>
-                  </h4>
-                  <% if current_user == bookmark.board.user %>
-                    <div class='ms-auto'>
-                      <%= link_to edit_board_path(bookmark.board), id: "button-edit-#{bookmark.board.id}" do %>
-                        <i class="bi bi-pencil-fill"></i>
-                      <% end %>
-                      <%= link_to board_path(bookmark.board), id: "button-delete-#{bookmark.board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
-                        <i class="bi bi-trash-fill"></i>
-                      <% end %>
-                    </div>
-                  <% else %>
-                    <div class='ms-auto'>
-                      <%= render 'bookmarks/bookmark_button', board: bookmark.board %>
-                    </div>
-                  <% end %>
-                </div>
-                <ul class="list-inline">
-                  <li><i class="bi bi-person"></i><%= bookmark.board.user.decorate.full_name %></li>
-                  <li><i class="bi bi-calendar"></i><%= l bookmark.board.created_at, format: :short %></li>
-                </ul>
-                <p class="card-text"><%= bookmark.board.body %></p>
-              </div>
-            </div>
+      <div class="row">
+      <form>
+        <div class="input-group mb-3">
+          <input class="form-control" placeholder="検索ワード" type="search"/>
+          <div class="input-group-append">
+            <input type="submit" value="検索" class="btn btn-primary"/>
           </div>
         </div>
-      <% end %>
+      </form>
+        <% if @bookmarks.present? %>
+          <% @bookmarks.each do |bookmark| %>
+            <%= render partial: "boards/board", locals: { board: bookmark.board } %>
+          <% end %>
+        <% else %>
+          <div class="mb-3">ブックマークがありません</div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>

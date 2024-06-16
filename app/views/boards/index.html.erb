@@ -19,7 +19,7 @@
       <div class="row">
         <% if @boards.present? %>
           <% @boards.each do |board| %>
-            <%= render partial: "board", locals: { board: board } %>
+            <%= render partial: "boards/board", locals: { board: board } %>
           <% end %>
         <% else %>
           <div class="mb-3">掲示板がありません</div>
@@ -28,5 +28,3 @@
     </div>
   </div>
 </div>
-
-

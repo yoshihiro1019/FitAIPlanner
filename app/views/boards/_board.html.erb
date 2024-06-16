@@ -16,7 +16,7 @@
               <%= link_to edit_board_path(board), id: "button-edit-#{board.id}" do %>
                 <i class="bi bi-pencil-fill"></i>
               <% end %>
-              <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete  } do %>
+              <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
                 <i class="bi bi-trash-fill"></i>
               <% end %>
             </div>
