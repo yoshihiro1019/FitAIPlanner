@@ -12,8 +12,8 @@ class BookmarksController < ApplicationController
     board = Board.find(params[:board_id])
     current_user.bookmarks.find_by(board:).destroy
     flash[:success] = t('notices.bookmark_destroyed')
-    Rails.logger.debug "Redirecting to boards_path"
-    redirect_to boards_path
+
+    redirect_to boards_url, success: t('notices.bookmark_destroyed'), status: :see_other
   end
 
   def index
