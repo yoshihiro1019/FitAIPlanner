@@ -19,6 +19,10 @@ class User < ApplicationRecord
     bookmarked_boards.include?(board)
   end
 
+  def own?(resource)
+    resource.user_id == self.id
+  end
+
   def bookmark(board)
     bookmarks.create(board:)
   end
