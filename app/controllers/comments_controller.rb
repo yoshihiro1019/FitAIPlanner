@@ -9,40 +9,18 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream { render "boards/comments/create" }
         format.html do
           flash[:success] = I18n.t('comments.create_success')
-          redirect_to @board
+          redirect_to board_path(@board)
         end
       end
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("comment-form", partial: "boards/comments/form", locals: { board: @board, comment: @comment }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_comment_form", partial: "boards/comments/form", locals: { board: @board, comment: @comment }) }
         format.html do
           flash[:danger] = I18n.t('comments.create_failure')
-          redirect_to @board
-        end
-      end
-    end
-  end
-
-  def edit; end
-
-  def update
-    if @comment.update(comment_params)
-      respond_to do |format|
-        format.turbo_stream
-        format.html do
-          flash[:notice] = I18n.t('comments.update_success')
-          redirect_to @comment.board
-        end
-      end
-    else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("edit_comment_form", partial: "boards/comments/form", locals: { board: @board, comment: @comment }) }
-        format.html do
-          flash[:danger] = I18n.t('comments.update_failure')
-          render :edit
+          redirect_to board_path(@board)
         end
       end
     end
@@ -50,24 +28,16 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.destroy
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{@comment.id}") }
-        format.html do
-          flash[:notice] = I18n.t('comments.destroy_success')
-          redirect_to @comment.board
-        end
-      end
-    else
-      respond_to do |format|
-        format.html do
-          flash[:danger] = I18n.t('comments.destroy_failure')
-          redirect_to @comment.board
-        end
+    @comment.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{@comment.id}") }
+      format.html do
+        flash[:notice] = I18n.t('comments.destroy_success')
+        redirect_to board_path(@comment.board)
       end
     end
   end
-  
+
   private
 
   def set_comment
