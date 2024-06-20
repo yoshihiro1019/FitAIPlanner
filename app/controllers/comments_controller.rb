@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_comment_form", partial: "boards/comments/form", locals: { board: @board, comment: @comment }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("comment-form", partial: "boards/comments/form", locals: { board: @board, comment: @comment }) }
         format.html do
           flash[:danger] = I18n.t('comments.create_failure')
           redirect_to @board
@@ -49,9 +49,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
     if @comment.destroy
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{@comment.id}") }
         format.html do
           flash[:notice] = I18n.t('comments.destroy_success')
           redirect_to @comment.board
@@ -59,7 +60,6 @@ class CommentsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.remove("comment-#{@comment.id}") }
         format.html do
           flash[:danger] = I18n.t('comments.destroy_failure')
           redirect_to @comment.board
@@ -67,7 +67,7 @@ class CommentsController < ApplicationController
       end
     end
   end
-
+  
   private
 
   def set_comment

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def own?(resource)
-    resource.user_id == self.id
+    resource.user_id == id
   end
 
   def bookmark(board)

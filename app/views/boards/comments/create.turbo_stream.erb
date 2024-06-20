@@ -1,2 +1,2 @@
 <%= turbo_stream.prepend "table-comment", partial: "boards/comments/comment", locals: { comment: @comment } %>
-<%= turbo_stream.replace "new_comment_form", partial: "boards/comments/form", locals: { board: @board, comment: Comment.new(board: @board) } %>
+<%= turbo_stream.replace "comment-form", partial: "boards/comments/form", locals: { board: @board, comment: Comment.new(board: @board) } %>

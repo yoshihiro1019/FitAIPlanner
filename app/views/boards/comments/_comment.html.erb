@@ -1,27 +1,25 @@
 <tr id="comment-<%= comment.id %>">
-<td style="width: 60px">
-  <%= image_tag "sample.jpg", class: "rounded-circle", width: 50, height: 50 %>
-</td>
-<td>
-  <h3 class="small"><%= comment.user.full_name %></h3>
-  <p><%= simple_format(comment.body) %></p>
-</td>
-<% if current_user.own?(comment) %>
+  <td style="width: 60px">
+    <%= image_tag "sample.jpg", class: "rounded-circle", width: 50, height: 50 %>
+  </td>
+  <td>
+    <h3 class="small"><%= comment.user.full_name %></h3>
+    <p><%= simple_format(comment.body) %></p>
+  </td>
   <td class="action">
     <ul class="list-inline justify-content-center" style="float: right;">
       <% if comment.user == current_user %>
         <li class="list-inline-item">
-          <%= link_to '#', class: 'edit-comment-link' do %>
+          <%= link_to edit_comment_path(comment), class: 'edit-comment-link' do %>
             <i class='bi bi-pencil-fill'></i>
           <% end %>
         </li>
         <li class="list-inline-item">
-          <%= link_to board_comment_path(comment.board, comment), method: :delete, data: { turbo_stream: true, confirm: '本当に削除しますか？' }, class: 'delete-comment-link' do %>
+          <%= link_to comment_path(comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'delete-comment-link' do %>
             <i class="bi bi-trash-fill"></i>
           <% end %>
         </li>
       <% end %>
     </ul>
   </td>
-<% end %>
 </tr>
