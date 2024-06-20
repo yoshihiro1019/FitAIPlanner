@@ -48,7 +48,6 @@ class CommentsController < ApplicationController
       end
     end
   end
-  
 
   private
 
@@ -63,32 +62,30 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:body)
   end
-  
 
-
-def build_comment
-comment = @board.comments.build(comment_params)
-comment.user = current_user
-comment
-end
-
-def handle_success
-respond_to do |format|
-  format.turbo_stream { render 'boards/comments/create' }
-  format.html do
-    flash[:success] = I18n.t('comments.create_success')
-    redirect_to board_path(@board)
+  def build_comment
+    comment = @board.comments.build(comment_params)
+    comment.user = current_user
+    comment
   end
-end
-end
 
-def handle_failure
-respond_to do |format|
-  format.turbo_stream { render turbo_stream: turbo_stream.replace('new_comment_form', partial: 'boards/comments/form', locals: { board: @board, comment: @comment }) }
-  format.html do
-    flash[:danger] = I18n.t('comments.create_failure')
-    redirect_to board_path(@board)
+  def handle_success
+    respond_to do |format|
+      format.turbo_stream { render 'boards/comments/create' }
+      format.html do
+        flash[:success] = I18n.t('comments.create_success')
+        redirect_to board_path(@board)
+      end
+    end
   end
-end
-end
+
+  def handle_failure
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('new_comment_form', partial: 'boards/comments/form', locals: { board: @board, comment: @comment }) }
+      format.html do
+        flash[:danger] = I18n.t('comments.create_failure')
+        redirect_to board_path(@board)
+      end
+    end
+  end
 end
