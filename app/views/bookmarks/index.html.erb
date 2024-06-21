@@ -22,3 +22,13 @@
     </div>
   </div>
 </div>
+
+<!-- ページネーションリンク -->
+<% if @bookmarks.total_count > 20 %>
+      <div class="d-flex justify-content-center">
+        <%= paginate @bookmarks %>
+      </div>
+       <% end %>
+    </div>
+  </div>
+</div>

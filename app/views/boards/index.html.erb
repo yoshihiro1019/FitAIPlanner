@@ -25,6 +25,12 @@
           <div class="mb-3">掲示板がありません</div>
         <% end %>
       </div>
+      <!-- ページネーションリンク -->
+       <% if @boards.total_count > 20 %>
+      <div class="d-flex justify-content-center">
+        <%= paginate @boards %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>
