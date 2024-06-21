@@ -25,6 +25,10 @@
           <div class="mb-3">掲示板がありません</div>
         <% end %>
       </div>
+      <!-- ページネーションリンク -->
+      <div class="d-flex justify-content-center">
+        <%= paginate @boards %>
+      </div>
     </div>
   </div>
 </div>

@@ -13,6 +13,6 @@ class BookmarksController < ApplicationController
   end
 
   def index
-    @bookmarks = current_user.bookmarks.includes(:board)
+    @bookmarks = current_user.bookmarks.includes(:board).page(params[:page])
   end
 end
