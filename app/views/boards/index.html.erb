@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-lg-10 offset-lg-1">
       <!-- 検索フォーム -->
-      <form>
+      <%= search_form_for @q, url: boards_path, method: :get do |f| %>
         <div class="input-group mb-3">
-          <input class="form-control" placeholder="検索ワード" type="search"/>
+          <%= f.search_field :title_or_body_cont, placeholder: "検索ワード", class: "form-control" %>
           <div class="input-group-append">
-            <input type="submit" value="検索" class="btn btn-primary"/>
+            <%= f.submit "検索", class: "btn btn-primary" %>
           </div>
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
   <!-- 掲示板一覧 -->
@@ -26,10 +26,10 @@
         <% end %>
       </div>
       <!-- ページネーションリンク -->
-       <% if @boards.total_count > 20 %>
-      <div class="d-flex justify-content-center">
-        <%= paginate @boards %>
-      </div>
+      <% if @boards.total_count > 20 %>
+        <div class="d-flex justify-content-center">
+          <%= paginate @boards %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -3,8 +3,8 @@ class BoardsController < ApplicationController
   before_action :set_board_for_show, only: %i[show]
 
   def index
-    @boards = Board.includes(:user).page(params[:page])
-    @bookmarks = current_user.bookmarks.includes(:board).page(params[:page]) if logged_in?
+    @q = Board.ransack(params[:q])
+    @boards = @q.result.includes(:user).page(params[:page])
   end
 
   def show

@@ -13,6 +13,7 @@ class BookmarksController < ApplicationController
   end
 
   def index
-    @bookmarks = current_user.bookmarks.includes(:board).page(params[:page])
+    @q = current_user.bookmarks.joins(:board).ransack(params[:q])
+    @bookmarks = @q.result(distinct: true).includes(:board).page(params[:page])
   end
 end

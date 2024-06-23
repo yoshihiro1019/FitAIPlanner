@@ -20,6 +20,9 @@ gem "jbuilder"
 
 gem 'turbo-rails', "1.1.1"
 
+gem 'ransack', '3.2.1'
+
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
