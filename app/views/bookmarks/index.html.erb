@@ -58,9 +58,14 @@
             </div>
           <% end %>
         <% else %>
-          <div class="mb-3">ブックマーク中の掲示板がありません</div>
+          <div class="mb-3">ブックマークがありません</div>
         <% end %>
       </div>
+      <% if @bookmarks.empty? %>
+        <div class="col-12">
+          <p class="text-center">検索結果に該当する掲示板が1件もありません。</p>
+        </div>
+      <% end %>
       <!-- ページネーションリンク -->
       <% if @bookmarks.total_count > 20 %>
         <div class="d-flex justify-content-center">
