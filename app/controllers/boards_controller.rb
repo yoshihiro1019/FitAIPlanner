@@ -16,7 +16,9 @@ class BoardsController < ApplicationController
     @board = Board.new
   end
 
-  def edit; end
+  def edit
+    # 既に @board を取得しているため、何もしない
+  end
 
   def create
     @board = current_user.boards.build(board_params)
@@ -51,7 +53,8 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board = current_user.boards.find(params[:id])
+    @board = Board.find_by(id: params[:id], user_id: current_user.id)
+    raise ActiveRecord::RecordNotFound unless @board
   end
 
   def set_board_for_show
