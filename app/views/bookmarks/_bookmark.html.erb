@@ -1,5 +1,6 @@
-<%= link_to board_bookmark_path(board), method: :post, data: { turbo_method: :post }, id: "bookmark-button-for-board-#{board.id}" do %>
-   <i class="bi bi-star"></i>
+<% if defined?(bookmark) && bookmark.present? %>
+  <% board = bookmark.board %>
 <% end %>
-
-
+<%= link_to board_bookmark_path(board), method: :post, data: { turbo_method: :post }, id: "bookmark-button-for-board-#{board.id}" do %>
+  <i class="bi bi-star"></i>
+<% end %>

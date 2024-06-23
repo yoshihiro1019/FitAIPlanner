@@ -1,8 +1,15 @@
-<% if current_user.bookmarks.find_by(board: board).present? %>
-          <%= render partial: 'bookmarks/unbookmark', locals: { board: board } %>
-        <% else %>
-          <%= render partial: 'bookmarks/bookmark', locals: { board: board } %>
-        <% end %>
 
-
-
+<% if defined?(bookmark) && bookmark.present? %>
+  <% board = bookmark.board %>
+  <% if current_user.bookmarks.find_by(board: board).present? %>
+    <%= render partial: 'bookmarks/unbookmark', locals: { bookmark: bookmark } %>
+  <% else %>
+    <%= render partial: 'bookmarks/bookmark', locals: { bookmark: bookmark } %>
+  <% end %>
+<% else %>
+  <% if current_user.bookmarks.find_by(board: board).present? %>
+    <%= render partial: 'bookmarks/unbookmark', locals: { board: board } %>
+  <% else %>
+    <%= render partial: 'bookmarks/bookmark', locals: { board: board } %>
+  <% end %>
+<% end %>

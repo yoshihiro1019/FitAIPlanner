@@ -19,7 +19,7 @@
       <div class="row">
         <% if @bookmarks.present? %>
           <% @bookmarks.each do |bookmark| %>
-            <%= render partial: "bookmarks/bookmark", locals: { bookmark: bookmark } %>
+            <%= render partial: "bookmarks/bookmark_button", locals: { bookmark: bookmark } %>
           <% end %>
         <% else %>
           <div class="mb-3">ブックマークがありません</div>

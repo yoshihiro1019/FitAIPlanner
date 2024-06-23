@@ -1,5 +1,6 @@
+<% if defined?(bookmark) && bookmark.present? %>
+  <% board = bookmark.board %>
+<% end %>
 <%= link_to board_bookmark_path(board), method: :delete, data: { turbo_method: :delete }, id: "unbookmark-button-for-board-#{board.id}" do %>
   <i class="bi bi-star-fill"></i>
 <% end %>
-
-
