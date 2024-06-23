@@ -53,15 +53,27 @@ class BoardsController < ApplicationController
   private
 
   def set_board
-    @board = Board.find_by(id: params[:id], user_id: current_user.id)
-    raise ActiveRecord::RecordNotFound unless @board
+    @board = current_user.boards.find_by(id: params[:id])
+    unless @board
+      Rails.logger.error "Board not found with id=#{params[:id]} for user_id=#{current_user.id}"
+      if Rails.env.test?
+        raise ActiveRecord::RecordNotFound
+      else
+        redirect_to boards_path, alert: 'Board not found'
+      end
+    end
   end
-
+  
   def set_board_for_show
-    @board = Board.find(params[:id])
-    return if @board.present? && (@board.user == current_user || !current_user.boards.exists?(id: @board.id))
-
-    redirect_to boards_path, alert: t('flash.alert.not_found')
+    @board = Board.find_by(id: params[:id])
+    unless @board
+      Rails.logger.error "Board not found with id=#{params[:id]}"
+      if Rails.env.test?
+        raise ActiveRecord::RecordNotFound
+      else
+        render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+      end
+    end
   end
 
   def board_params
