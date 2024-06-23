@@ -5,7 +5,7 @@
       <!-- 検索フォーム -->
       <%= search_form_for @q, url: bookmarks_boards_path, method: :get do |f| %>
         <div class="input-group mb-3">
-          <%= f.search_field :board_title_or_board_body_cont, placeholder: "検索ワード", class: "form-control" %>
+          <%= f.search_field :title_or_body_cont, placeholder: "検索ワード", class: "form-control" %>
           <div class="input-group-append">
             <%= f.submit "検索", class: "btn btn-primary" %>
           </div>
@@ -17,59 +17,59 @@
   <div class="row">
     <div class="col-12">
       <div class="row">
-        <% if @bookmarks.present? %>
-          <% @bookmarks.each do |bookmark| %>
+        <% if @bookmarked_boards.present? %>
+          <% @bookmarked_boards.each do |board| %>
             <div class="col-sm-12 col-lg-4 mb-3">
-              <div id="board-id-<%= bookmark.board.id %>">
+              <div id="board-id-<%= board.id %>">
                 <div class="card">
-                  <% if bookmark.board.board_image? %>
-                    <%= image_tag bookmark.board.board_image.url, class: "card-img-top", width: "300", height:"200" %>
+                  <% if board.board_image? %>
+                    <%= image_tag board.board_image.url, class: "card-img-top", width: "300", height:"200" %>
                   <% else %>
                     <%= image_tag "board_placeholder.png", class: "card-img-top", width: "300", height:"200" %>
                   <% end %>
                   <div class="card-body">
                     <div class="d-flex">
                       <h4 class="card-title">
-                        <%= link_to bookmark.board.title, board_path(bookmark.board) %>
+                        <%= link_to board.title, board_path(board) %>
                       </h4>
-                      <% if current_user == bookmark.board.user %>
+                      <% if current_user == board.user %>
                         <div class='ms-auto'>
-                          <%= link_to edit_board_path(bookmark.board), id: "button-edit-#{bookmark.board.id}" do %>
+                          <%= link_to edit_board_path(board), id: "button-edit-#{board.id}" do %>
                             <i class="bi bi-pencil-fill"></i>
                           <% end %>
-                          <%= link_to board_path(bookmark.board), id: "button-delete-#{bookmark.board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
+                          <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_confirm: '削除しますか？', turbo_method: :delete } do %>
                             <i class="bi bi-trash-fill"></i>
                           <% end %>
                         </div>
                       <% else %>
                         <div class='ms-auto'>
-                          <%= render 'bookmarks/bookmark_button', board: bookmark.board %>
+                          <%= render 'bookmarks/bookmark_button', board: board %>
                         </div>
                       <% end %>
                     </div>
                     <ul class="list-inline">
-                      <li><i class="bi bi-person"></i><%= bookmark.board.user.decorate.full_name %></li>
-                      <li><i class="bi bi-calendar"></i><%= l bookmark.board.created_at, format: :short %></li>
+                      <li><i class="bi bi-person"></i><%= board.user.decorate.full_name %></li>
+                      <li><i class="bi bi-calendar"></i><%= l board.created_at, format: :short %></li>
                     </ul>
-                    <p class="card-text"><%= bookmark.board.body %></p>
+                    <p class="card-text"><%= board.body %></p>
                   </div>
                 </div>
               </div>
             </div>
           <% end %>
         <% else %>
-          <div class="mb-3">ブックマークがありません</div>
+          <div class="mb-3">ブックマーク中の掲示板がありません</div>
         <% end %>
       </div>
-      <% if @bookmarks.empty? %>
+      <% if @bookmarked_boards.empty? %>
         <div class="col-12">
           <p class="text-center">検索結果に該当する掲示板が1件もありません。</p>
         </div>
       <% end %>
       <!-- ページネーションリンク -->
-      <% if @bookmarks.total_count > 20 %>
+      <% if @bookmarked_boards.total_count > 20 %>
         <div class="d-flex justify-content-center">
-          <%= paginate @bookmarks %>
+          <%= paginate @bookmarked_boards %>
         </div>
       <% end %>
     </div>

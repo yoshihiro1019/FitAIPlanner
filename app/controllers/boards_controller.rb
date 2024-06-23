@@ -43,6 +43,11 @@ class BoardsController < ApplicationController
     redirect_to boards_url, success: '掲示板を削除しました', status: :see_other
   end
 
+  def bookmarks
+    @q = Board.joins(:bookmarks).where(bookmarks: { user_id: current_user.id }).ransack(params[:q])
+    @bookmarked_boards = @q.result(distinct: true).includes(:user).page(params[:page])
+  end
+
   private
 
   def set_board
