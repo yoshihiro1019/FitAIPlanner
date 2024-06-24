@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_boards, through: :bookmarks, source: :board
+  mount_uploader :avatar, AvatarUploader
   def full_name
     "#{last_name} #{first_name}"
   end

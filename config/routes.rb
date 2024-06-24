@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :boards do
     resources :comments, shallow: true, only: %i[create edit update destroy]
     resource :bookmark, only: [:create, :destroy]
-  end
+  end  
+  resource :profile, only: [:show, :edit, :update]
+
+  
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'

@@ -30,7 +30,15 @@
           <div class='dropdown-menu dropdown-menu-end'>
             <div class='dropdown-item'><%= current_user.decorate.full_name %></div>
             <div class='dropdown-divider'></div>
-            <%= link_to t('header.profile'), '#', class: 'dropdown-item' %>
+            <% if logged_in? && current_user.avatar? %>
+  <%= link_to profile_path, class: 'dropdown-item' do %>
+    <%= image_tag current_user.avatar.url, alt: t('header.profile'), class: 'avatar-image' %>
+    <%= t('header.profile') %>
+  <% end %>
+<% else %>
+  <%= link_to t('header.profile'), profile_path, class: 'dropdown-item' %>
+<% end %>
+
             <%= link_to t('header.logout'), logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %>
           </div>
         </li>
