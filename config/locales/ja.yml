@@ -60,9 +60,13 @@ ja:
   flash:
     success:
       board_updated: '掲示板を更新しました'
+      profile_update: "ユーザーを更新しました"
     alert:
       board_not_updated: '掲示板を更新出来ませんでした'
       not_found: '指定された掲示板が見つかりませんでした'
+    danger:
+      profile_update_failed: "ユーザーを更新出来ませんでした"
+ 
   notices:
     bookmark_created: "ブックマークしました"
     bookmark_destroyed: "ブックマークを外しました"
