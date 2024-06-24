@@ -9,11 +9,11 @@ class ProfilesController < ApplicationController
   
     def update
       if @user.update(user_params)
-        flash[:notice] = "ユーザーを更新しました"
+        flash[:success] = "ユーザーを更新しました"
         redirect_to profile_path
       else
-        flash.now[:alert] = "ユーザーを更新出来ませんでした"
-        render :edit
+        flash.now[:danger] = "ユーザーを更新出来ませんでした"
+        render :edit, status: :unprocessable_entity
       end
     end
   
@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
     end
   
     def user_params
-      params.require(:user).permit(:email, :name, :avatar)
-    end
+        params.require(:user).permit(:email, :first_name, :last_name, :avatar)
+      end
   end
   

@@ -66,3 +66,6 @@ ja:
   notices:
     bookmark_created: "ブックマークしました"
     bookmark_destroyed: "ブックマークを外しました"
+  profiles:
+    edit:
+      title: "プロフィール編集"
