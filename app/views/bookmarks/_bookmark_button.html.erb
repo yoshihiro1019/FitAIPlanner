@@ -1,4 +1,3 @@
-
 <% if defined?(bookmark) && bookmark.present? %>
   <% board = bookmark.board %>
   <% if current_user.bookmarks.find_by(board: board).present? %>

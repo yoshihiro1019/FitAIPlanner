@@ -15,6 +15,5 @@ class BookmarksController < ApplicationController
     @board = Board.find(params[:board_id])
     bookmark = current_user.bookmarks.find_by(board: @board)
     bookmark&.destroy
-    redirect_to @board
   end
 end
