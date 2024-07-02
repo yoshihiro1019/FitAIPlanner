@@ -1,5 +1,6 @@
 ja:
   defaults:
+  
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
@@ -77,6 +78,7 @@ ja:
     new:
       title: パスワードリセット申請
       submit: 送信
+      password_reset: 'パスワードリセット'
     edit:
       title: パスワードリセット
     create:
