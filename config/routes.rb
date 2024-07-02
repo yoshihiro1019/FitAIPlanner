@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root "static_pages#top"
   
   get 'boards/bookmarks', to: 'bookmarks#index', as: 'bookmarks_boards'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
     resource :bookmark, only: [:create, :destroy]
   end  
   resource :profile, only: [:show, :edit, :update]
-
+  resources :password_resets, only: %i[new create edit update]
   
 
   get 'login', to: 'user_sessions#new'
