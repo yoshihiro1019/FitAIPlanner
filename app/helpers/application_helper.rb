@@ -1,5 +1,6 @@
 module ApplicationHelper
-  def title(page_title = '')
-    content_for :title, "#{page_title} | RUNTEQ BOARD APP" if page_title.present?
+  def page_title(title = '', admin: false)
+    base_title = admin ? 'RUNTEQ BOARD APP(管理画面)' : 'RUNTEQ BOARD APP'
+    title.present? ? "#{title} | #{base_title}" : base_title
   end
 end

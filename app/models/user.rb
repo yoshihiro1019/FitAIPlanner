@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_boards, through: :bookmarks, source: :board
   mount_uploader :avatar, AvatarUploader
+  enum role: { general: 0, admin: 1 }
+  
   def full_name
     "#{last_name} #{first_name}"
   end
