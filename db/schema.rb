@@ -60,11 +60,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
   end
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "board_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "board_id", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "fk_rails_9510ce0f70"
+    t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -73,14 +75,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
     t.string "salt"
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "role", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
     t.string "avatar"
-    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -90,4 +92,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
   add_foreign_key "boards", "users"
   add_foreign_key "bookmarks", "boards"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "comments", "boards"
+  add_foreign_key "comments", "users"
 end
