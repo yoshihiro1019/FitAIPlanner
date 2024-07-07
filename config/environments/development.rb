@@ -63,7 +63,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
-
+config.web_console.permissions = '172.31.0.1'
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 
