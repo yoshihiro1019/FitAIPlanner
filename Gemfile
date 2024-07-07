@@ -9,7 +9,7 @@ gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem 'sassc'
+
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.5"
 
@@ -92,4 +92,4 @@ end
 
 gem "bootstrap5-kaminari-views", "~> 0.0.1"
 
-gem "webpacker", "~> 5.4"
+
