@@ -1,0 +1,15 @@
+<%= search_form_for @q, url: admin_boards_path do |f| %>
+    <div class="row">
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="d-inline me-3">
+          <%= f.search_field :title_or_body_cont, class: 'form-control', placeholder: t('defaults.search_word') %>
+        </div>
+        <div class="d-flex me-3">
+          <%= f.date_field :created_at_gteq, class: 'form-control' %>
+          <span class="mx-1">〜</span>
+          <%= f.date_field :created_at_lteq_end_of_day, class: 'form-control' %>
+        </div>
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>

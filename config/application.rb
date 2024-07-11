@@ -44,5 +44,6 @@ module V3BasicRailsBasic
     config.time_zone = 'Tokyo'
 
     config.autoload_paths += %W(#{config.root}/app/uploaders)
+    
   end
 end

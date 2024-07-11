@@ -1,17 +1,18 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-  <div class="position-sticky pt-3 sidebar-sticky">
+<div id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="position-sticky pt-3">
     <ul class="nav flex-column">
+    <li class="nav-item">
+    <%= link_to admin_users_path, class: "nav-link #{active_if('admin/users')}" do %>
+      <i class="bi bi-file-earmark-text"></i>
+       <%= t('admin.users.index.title') %>
+    <% end %>
+  </li>
       <li class="nav-item">
-        <%= link_to '#', class: 'nav-link' do %>
-          <i class="bi bi-file-earmark"></i>
-          <%= User.model_name.human %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to '#', class: 'nav-link' do %>
-          <i class="bi bi-person"></i>
-          <%= Board.model_name.human %>
+        <%= link_to admin_boards_path, class: "nav-link #{active_if('admin/boards')}" do %>
+          <i class="bi bi-people"></i>
+                    <%= t('admin.boards.index.title') %>
         <% end %>
       </li>
     </ul>
   </div>
+</div>

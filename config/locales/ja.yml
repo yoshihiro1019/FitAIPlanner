@@ -1,6 +1,12 @@
 ja:
   defaults:
-  
+    show: "表示"
+    edit: "編集"
+    delete: "削除"
+    delete_confirm: "本当に削除しますか？"
+    search_word: "検索ワード"
+    unspecified: "未指定"
+    search: "検索"
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
@@ -68,7 +74,6 @@ ja:
       not_found: '指定された掲示板が見つかりませんでした'
     danger:
       profile_update_failed: "ユーザーを更新出来ませんでした"
- 
   notices:
     bookmark_created: "ブックマークしました"
     bookmark_destroyed: "ブックマークを外しました"
@@ -87,6 +92,9 @@ ja:
     update:
       success: パスワードを変更しました
   admin:
+    boards:
+      index:
+        title: "掲示板一覧"
     user_sessions:
       new:
         title: ログイン
@@ -99,3 +107,27 @@ ja:
     dashboards:
       index:
         title: ダッシュボード
+    users:
+      index:
+        title: "ユーザー一覧"
+      show:
+        title: "ユーザー詳細"
+      edit:
+        title: "ユーザー編集"
+  activerecord:
+    attributes:
+      user:
+        id: "ID"
+        full_name: "フルネーム"
+        role: "ロール"
+        created_at: "作成日時"
+      board:
+        id: "ID"
+        title: "タイトル"
+        user: "ユーザー"
+        created_at: "作成日時"
+    enums:
+      user:
+        role:
+          general: "一般"
+          admin: "管理者"

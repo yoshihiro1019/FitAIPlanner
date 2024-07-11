@@ -1,4 +1,5 @@
 Ransack.configure do |config|
-    # Add custom configuration here if needed
-  end
-  
+  config.add_predicate 'lteq_end_of_day',
+                       arel_predicate: 'lteq',
+                       formatter: proc { |v| v.end_of_day } # ここでend_of_dayメソッドを実行している
+end
