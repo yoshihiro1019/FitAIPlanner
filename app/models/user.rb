@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :bookmarked_boards, through: :bookmarks, source: :board
   mount_uploader :avatar, AvatarUploader
   enum role: { general: 0,  admin: 1 }
-  
+
   include EnumHelp
   def full_name
     "#{last_name} #{first_name}"
@@ -35,6 +35,4 @@ class User < ApplicationRecord
   def unbookmark(board)
     bookmarks.find_by(board:).destroy
   end
-
-  
 end
