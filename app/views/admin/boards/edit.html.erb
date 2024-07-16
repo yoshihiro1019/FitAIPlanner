@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-      <h1>掲示板編集</h1>
+      <h1><%= t('boards.edit.title') %></h1>
       <%= form_with model: @board, url: admin_board_path(@board), local: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class="form-group">

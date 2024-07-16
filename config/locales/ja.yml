@@ -1,17 +1,22 @@
 ja:
   defaults:
-    show: "表示"
+    show: "詳細"
     edit: "編集"
     delete: "削除"
     delete_confirm: "本当に削除しますか？"
     search_word: "検索ワード"
     unspecified: "未指定"
+    general: "一般"
+    admin: "管理者"
     search: "検索"
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
       require_login: ログインしてください
       not_authorized: 権限がありません
+      deleted: 掲示板を削除しました
+      deleted2: ユーザーを削除しました
+      updated: ユーザーを更新しました
   helpers:
     submit:
       create: 登録
@@ -114,18 +119,36 @@ ja:
         title: "ユーザー詳細"
       edit:
         title: "ユーザー編集"
+      form:
+        email: "メールアドレス"
+        last_name: "姓"
+        first_name: "名"
+        avatar: "アバター"
+        role: "権限"
   activerecord:
     attributes:
       user:
         id: "ID"
         full_name: "フルネーム"
-        role: "ロール"
+        role: "権限"
         created_at: "作成日時"
+        avatar: "アバター"
+        last_name: "姓"
+        first_name: "名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        roles:
+          general: '一般'
+          admin: '管理者'
       board:
         id: "ID"
         title: "タイトル"
         user: "ユーザー"
         created_at: "作成日時"
+        body: "本文"
+        board_image: "掲示板画像"
+        user_id: "ユーザー"
     enums:
       user:
         role:

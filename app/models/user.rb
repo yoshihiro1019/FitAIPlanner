@@ -13,7 +13,9 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_boards, through: :bookmarks, source: :board
   mount_uploader :avatar, AvatarUploader
-  enum role: { general: 0,  admin: 1 }
+  enum role: { general: 0, admin: 1 }
+  
+  
 
   include EnumHelp
   def full_name
@@ -35,4 +37,9 @@ class User < ApplicationRecord
   def unbookmark(board)
     bookmarks.find_by(board:).destroy
   end
-end
+
+  def role_name
+    ::I18n.t("activerecord.attributes.user.roles.#{role}")
+  end
+
+  end

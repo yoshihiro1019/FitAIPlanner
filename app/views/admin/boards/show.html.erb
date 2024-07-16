@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-      <h1>掲示板詳細</h1>
+    <h1><%= t('boards.show.title') %></h1>
       <div class="text-right mb-3">
         <%= link_to t('defaults.edit'), edit_admin_board_path(@board), class: 'btn btn-success' %>
         <%= link_to t('defaults.delete'), admin_board_path(@board), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-danger' %>

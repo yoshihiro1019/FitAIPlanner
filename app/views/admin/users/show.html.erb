@@ -8,29 +8,29 @@
         <%= link_to t('defaults.delete'), admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-danger' %>
       </div>
       <table class="table table-bordered bg-white">
-        <tr>
+        <tr class="table-row">
           <th scope="row"><%= User.human_attribute_name(:id) %></th>
           <td><%= @user.id %></td>
         </tr>
-        <tr>
+        <tr class="table-row">
           <th scope="row"><%= User.human_attribute_name(:role) %></th>
-          <td><%= @user.role_i18n %></td>
+          <td><%= @user.role_name %></td>
         </tr>
-        <tr>
+        <tr class="table-row">
           <th scope="row"><%= User.human_attribute_name(:full_name) %></th>
           <td><%= @user.decorate.full_name %></td>
         </tr>
-        <tr>
+        <tr class="table-row">
           <th scope="row"><%= User.human_attribute_name(:avatar) %></th>
           <td>
             <% if @user.avatar.present? %>
-              <%= image_tag @user.avatar.url %>
+              <%= image_tag @user.avatar.url, class: 'img-fluid' %>
             <% else %>
-              <%= image_tag 'default_avatar.png' %> <!-- デフォルトのアバター画像を指定 -->
+              <%= image_tag 'default_avatar.png', class: 'img-fluid' %> <!-- デフォルトのアバター画像を指定 -->
             <% end %>
           </td>
         </tr>
-        <tr>
+        <tr class="table-row">
           <th scope="row"><%= User.human_attribute_name(:created_at) %></th>
           <td><%= l @user.created_at, format: :long %></td>
         </tr>

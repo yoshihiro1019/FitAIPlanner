@@ -1,0 +1,20 @@
+.table-row {
+    padding: 15px;  /* 適切なパディングを追加 */
+  }
+  
+  th[scope="row"] {
+    width: 25%;  /* ラベルカラムの幅を指定 */
+  }
+  
+  td {
+    width: 75%;  /* データカラムの幅を指定 */
+  }
+  
+  .table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;  /* テーブルの境界線を調整 */
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+  

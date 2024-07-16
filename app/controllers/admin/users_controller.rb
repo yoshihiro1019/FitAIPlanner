@@ -21,7 +21,7 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
     @user.destroy!
-    redirect_to admin_users_path, success: t('defaults.flash_message.deleted', item: User.model_name.human), status: :see_other
+    redirect_to admin_users_path, success: t('defaults.flash_message.deleted2', item: User.model_name.human), status: :see_other
   end
 
   private
