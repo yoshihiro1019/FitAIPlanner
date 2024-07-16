@@ -14,8 +14,6 @@ class User < ApplicationRecord
   has_many :bookmarked_boards, through: :bookmarks, source: :board
   mount_uploader :avatar, AvatarUploader
   enum role: { general: 0, admin: 1 }
-  
-  
 
   include EnumHelp
   def full_name
@@ -41,5 +39,4 @@ class User < ApplicationRecord
   def role_name
     ::I18n.t("activerecord.attributes.user.roles.#{role}")
   end
-
-  end
+end
