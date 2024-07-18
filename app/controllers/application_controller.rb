@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    unless current_user
-      flash[:danger] = t('defaults.flash_message.require_login')
-      redirect_to login_path
-    end
+    return if current_user
+
+    flash[:danger] = t('defaults.flash_message.require_login')
+    redirect_to login_path
   end
 
   def not_authenticated
