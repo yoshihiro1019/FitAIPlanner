@@ -19,9 +19,7 @@
           <%= f.hidden_field :board_image_cache %>
         </div>
         <div class='mt-3 mb-3'>
-          <%= image_tag @board.board_image.url,
-                        id: 'preview',
-                        size: '300x200' %>
+          
         </div>
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>

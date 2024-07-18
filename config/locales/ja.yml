@@ -5,7 +5,7 @@ ja:
     delete: "削除"
     delete_confirm: "本当に削除しますか？"
     search_word: "検索ワード"
-    unspecified: "未指定"
+    unspecified: "指定なし"
     general: "一般"
     admin: "管理者"
     search: "検索"
@@ -17,6 +17,7 @@ ja:
       deleted: 掲示板を削除しました
       deleted2: ユーザーを削除しました
       updated: ユーザーを更新しました
+      updated2: 掲示板を更新しました
   helpers:
     submit:
       create: 登録
@@ -149,8 +150,8 @@ ja:
         body: "本文"
         board_image: "掲示板画像"
         user_id: "ユーザー"
-    enums:
-      user:
-        role:
-          general: "一般"
-          admin: "管理者"
+  enums:
+    user:
+      role:
+        general: "一般"
+        admin: "管理者"

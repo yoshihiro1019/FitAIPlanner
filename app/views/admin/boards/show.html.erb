@@ -28,16 +28,7 @@
           <th scope="row"><%= Board.human_attribute_name(:created_at) %></th>
           <td><%= l @board.created_at, format: :long %></td>
         </tr>
-        <tr>
-          <th scope="row"><%= Board.human_attribute_name(:board_image) %></th>
-          <td>
-            <% if @board.board_image.present? %>
-              <%= image_tag @board.board_image.url %>
-            <% else %>
-              <%= image_tag 'board_placeholder.png' %> <!-- デフォルトの画像 -->
-            <% end %>
-          </td>
-        </tr>
+        
       </table>
     </div>
   </div>

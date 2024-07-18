@@ -10,7 +10,7 @@ class Admin::BoardsController < Admin::BaseController
 
   def update
     if @board.update(board_params)
-      redirect_to admin_board_path(@board), success: t('defaults.flash_message.updated', item: Board.model_name.human)
+      redirect_to admin_board_path(@board), success: t('defaults.flash_message.updated2', item: Board.model_name.human)
     else
       flash.now['danger'] = t('defaults.flash_message.not_updated', item: Board.model_name.human)
       render :edit
