@@ -1,0 +1,113 @@
+<h1>ジムを探す</h1>
+
+<!-- 検索ボックス -->
+<input id="pac-input" class="controls" type="text" placeholder="ジム　都道府県　で検索" style="margin-bottom: 10px; width: 100%; padding: 10px;">
+
+<!-- マップの表示エリア -->
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+<script>
+  // Google Maps API キーを環境変数から取得
+  const apiKey = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
+
+  // Google Maps API のスクリプトを読み込む
+  const script = document.createElement('script');
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+  script.async = true;
+  document.head.appendChild(script);
+
+  let map, service, infowindow;
+
+  function initMap() {
+    // 地図の中心を指定
+    const location = { lat: 35.681236, lng: 139.767125 }; // ここでは東京駅の座標を例として設定
+
+    // マップの作成
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: location,
+      zoom: 14,
+    });
+
+    // 検索ボックスの作成
+    const input = document.getElementById("pac-input");
+    const searchBox = new google.maps.places.SearchBox(input);
+
+    // 地図のバイアスを現在の地図の境界に制限
+    map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    // 検索ボックスで場所が選択されたときに実行
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // 選択された場所にズームし、マップの中心を変更
+      const bounds = new google.maps.LatLngBounds();
+      places.forEach((place) => {
+        if (!place.geometry || !place.geometry.location) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+
+        // マップの中心を新しい場所に変更
+        map.setCenter(place.geometry.location);
+        map.setZoom(14);
+
+        // ジムの検索を行う
+        const request = {
+          location: place.geometry.location,
+          radius: '5000', // 検索範囲（メートル単位）
+          type: ['gym'],  // 検索対象はジム
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);
+      });
+    });
+
+    // ジムの検索リクエスト
+    const request = {
+      location: location,
+      radius: '5000', // 検索範囲（メートル単位）
+      type: ['gym'],  // 検索対象はジム
+    };
+
+    infowindow = new google.maps.InfoWindow();
+
+    // Place Service を使ってジムを検索
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+  }
+
+  // 検索結果の処理
+  function callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (let i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+      }
+    }
+  }
+
+  // マーカーを作成して地図に表示
+  function createMarker(place) {
+    const marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location,
+    });
+
+    google.maps.event.addListener(marker, "click", function () {
+      infowindow.setContent(place.name);
+      infowindow.open(map, this);
+    });
+  }
+</script>

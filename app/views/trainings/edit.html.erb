@@ -1,0 +1,31 @@
+<h1>トレーニングを編集</h1>
+
+<%= form_with(model: @training, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, 'トレーニング名' %>
+    <%= form.select :title, options_for_select(['選択してください', '筋トレ', 'ランニング', 'サイクリング'], @training.title), {}, class: 'form-select', id: 'training_title' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, 'トレーニング内容' %>
+    <%= form.select :description, options_for_select(['ウォームアップ', 'クールダウン', 'メインセット'], @training.description), {}, class: 'form-select', id: 'training_description' %>
+  </div>
+
+  <div id="training_parts" class="mb-3">
+    <label for="training_part">筋トレ部位</label>
+    <%= form.select :part, options_for_select(['胸', '背中', '脚', '肩', '腕', 'お尻', '腹筋'], @training.part), {}, class: 'form-select', id: 'training_parts' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :sets, 'セット数' %>
+    <%= form.select :sets, options_for_select([0, 1, 2, 3, 4, 5], @training.sets), {}, class: 'form-select', id: 'sets' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :reps, '回数' %>
+    <%= form.select :reps, options_for_select([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], @training.reps), {}, class: 'form-select', id: 'reps' %>
+  </div>
+
+  <%= form.submit '更新', class: 'btn btn-primary' %>
+<% end %>
+

@@ -3,6 +3,7 @@
 <head>
   <title><%= page_title(yield(:title)) %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="turbo-cache-control" content="no-cache">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -13,9 +14,7 @@
 <body>
   <% if logged_in? %>
     <%= render 'shared/header' %>
-    <% if current_user.avatar? %>
-      <%= link_to image_tag(current_user.avatar.url), profile_path, class: "avatar-link" %>
-    <% end %>
+    
   <% else %>
     <%= render 'shared/before_login_header' %>
   <% end %>

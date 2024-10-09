@@ -1,0 +1,16 @@
+<h1>トレーニング記録一覧</h1>
+
+<%= link_to '新しいトレーニングを記録', new_training_path, class: 'btn btn-primary' %>
+
+<ul>
+  <% @trainings.each do |training| %>
+    <li>
+      <%= link_to training.title, training_path(training) %> - <%= training.date %>
+      <br />
+      <%= simple_format(training.description) %>
+      <br />
+      <%= link_to '編集', edit_training_path(training), class: 'btn btn-secondary' %>
+      <%= link_to '削除', training_path(training), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    </li>
+  <% end %>
+</ul>

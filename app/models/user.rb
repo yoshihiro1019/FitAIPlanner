@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
-
+  has_many :trainings
   validates :password, presence: true, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password].present? }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password].present? }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password].present? }

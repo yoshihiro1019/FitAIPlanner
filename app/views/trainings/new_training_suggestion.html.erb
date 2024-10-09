@@ -1,0 +1,27 @@
+<h1>トレーニング提案を入力</h1>
+
+<%= form_with url: trainings_path, method: :post do |form| %>
+  <div class="form-group">
+    <%= form.label :goal, "トレーニングの目標" %>
+    <%= form.text_field :goal, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :time, "トレーニングの時間 (分)" %>
+    <%= form.number_field :time, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :level, "トレーニングの強度" %>
+    <%= form.select :level, ['低', '中', '高'], class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :equipment, "必要な器具" %>
+    <%= form.text_field :equipment, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "提案を作成", class: "btn btn-primary" %>
+  </div>
+<% end %>

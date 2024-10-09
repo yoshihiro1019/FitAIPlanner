@@ -23,6 +23,10 @@
             <%= f.text_field :first_name, class: "form-control" %>
           </div>
           <div class="mb-3">
+            <%= f.label :address, '住所（任意）' %>
+            <%= f.text_field :address, class: 'form-control' %>
+          </div>
+          <div class="mb-3">
             <%= f.label :avatar, 'アバター' %>
             <%= f.file_field :avatar, class: "form-control", accept: 'image/*' %>
             <%= f.hidden_field :avatar_cache %>

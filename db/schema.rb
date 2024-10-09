@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_24_045325) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
+  create_table "trainings", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "part"
+    t.integer "sets"
+    t.integer "reps"
+    t.integer "user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -83,6 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_070740) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

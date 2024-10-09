@@ -1,4 +1,4 @@
-version: '3.'
+version: '3.8'
 services:
   db:
     image: mysql:5.7
@@ -13,7 +13,7 @@ services:
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    container_name: runteq_normal_curriculum_container
+    container_name: FitAIPlanner_container
     tty: true
     stdin_open: true
     volumes:
@@ -23,6 +23,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
     ports:
       - "3000:3000"
     depends_on:

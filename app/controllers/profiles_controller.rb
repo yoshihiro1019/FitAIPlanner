@@ -1,5 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :set_user
+   # レイアウトを指定
+
+  def app_page
+    # app_layout.html.erb をレンダリングするためのアクション
+  end
 
   def show; end
 
@@ -22,6 +27,6 @@ class ProfilesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :avatar)
+    params.require(:user).permit(:email, :first_name, :last_name, :avatar, :avatar_cache, :address)
   end
 end

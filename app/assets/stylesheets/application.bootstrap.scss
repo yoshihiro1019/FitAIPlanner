@@ -1,2 +1,19 @@
 @import 'bootstrap/dist/css/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.playlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* 画像間のスペースを調整 */
+  }
+  
+  .playlist-item {
+    width: 150px; /* 画像の横幅を指定 */
+    text-align: center; /* テキストを中央揃え */
+  }
+  
+  .playlist-item img {
+    width: 100%; /* 画像を指定したコンテナの幅に合わせる */
+    height: auto; /* アスペクト比を保つ */
+  }
+  

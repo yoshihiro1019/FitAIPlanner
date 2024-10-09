@@ -1,0 +1,21 @@
+<h1><%= @training.title %> の詳細</h1>
+
+<p><strong>トレーニング名:</strong> <%= @training.title %></p>
+
+<p><strong>トレーニング内容:</strong> <%= @training.description %></p>
+
+<% if @training.part.present? %>
+  <p><strong>筋トレ部位:</strong> <%= @training.part %></p>
+<% end %>
+
+<p><strong>セット数:</strong> <%= @training.sets %></p>
+
+<p><strong>回数:</strong> <%= @training.reps %></p>
+
+<!-- 追加部分: 作成日と更新日を表示 -->
+<p><strong>作成日:</strong> <%= @training.created_at.strftime('%Y年%m月%d日') %></p>
+<p><strong>更新日:</strong> <%= @training.updated_at.strftime('%Y年%m月%d日') %></p>
+
+<%= link_to '編集', edit_training_path(@training), class: 'btn btn-primary' %>
+<%= link_to '削除', @training, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+<%= link_to '記録一覧に戻る', trainings_path, class: 'btn btn-secondary' %>

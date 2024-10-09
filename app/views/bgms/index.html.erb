@@ -1,0 +1,11 @@
+<h1>BGMを選択</h1>
+
+<div class="playlist-container">
+  <% @playlists.each do |playlist| %>
+    <div class="playlist-item">
+      <%= image_tag playlist.images.first['url'], alt: playlist.name %>
+      <p><%= playlist.name %></p>
+      <a href="<%= playlist.external_urls['spotify'] %>" target="_blank">Spotifyで再生</a>
+    </div>
+  <% end %>
+</div>

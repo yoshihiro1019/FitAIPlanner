@@ -9,6 +9,12 @@ gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'googleauth'
+
+gem 'ruby-openai'
+
+gem 'httparty'
+
 gem 'enum_help'
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.5"
@@ -16,14 +22,17 @@ gem "mysql2", "~> 0.5"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'turbo-rails', "1.1.1"
 
 gem 'ransack', '3.2.1'
 
-
+gem 'rspotify'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

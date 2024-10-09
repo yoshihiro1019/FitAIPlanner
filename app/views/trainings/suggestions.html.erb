@@ -1,0 +1,30 @@
+<h1>トレーニング提案機能</h1>
+<p>こちらはトレーニング提案の画面です。</p>
+
+<%= form_with(url: training_suggestions_path, method: :get, local: true) do %>
+  <div class="mb-3">
+    <label for="goal">目標</label>
+    <%= select_tag :goal, options_for_select(['筋力増強', '体重減少', '持久力向上']), class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <label for="level">体力レベル</label>
+    <%= select_tag :level, options_for_select(['初心者', '中級者', '上級者']), class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <label for="equipment">使用設備</label>
+    <%= select_tag :equipment, options_for_select(['体重のみ', 'ダンベル', 'バーベル']), class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <label for="time">トレーニング時間</label>
+    <%= number_field_tag :time, 30, class: 'form-control', step: 5, min: 5 %> 分
+  </div>
+
+  <%= submit_tag '提案を受ける', class: 'btn btn-primary' %>
+<% end %>
+
+<h1>提案されたトレーニングプラン</h1>
+<p><%= @training_plan %></p>
+<%= link_to 'もう一度提案を受ける', training_suggestions_path, class: 'btn btn-primary' %>
