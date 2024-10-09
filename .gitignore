@@ -30,6 +30,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/superb-receiver-353609-7f91a076035f.json
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
