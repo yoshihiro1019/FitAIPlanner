@@ -102,3 +102,5 @@ end
 gem "bootstrap5-kaminari-views", "~> 0.0.1"
 
 
+
+gem "sassc-rails", "~> 2.1"
