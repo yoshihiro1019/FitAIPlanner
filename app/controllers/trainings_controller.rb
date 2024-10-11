@@ -4,7 +4,7 @@ require 'json'
 require 'googleauth'  # OAuth 2.0の認証に必要なライブラリを追加
 
 SCOPE = ['https://www.googleapis.com/auth/cloud-platform'].freeze  # OAuth 2.0のスコープを定義
-SCOPE = ['https://www.googleapis.com/auth/generative-language'].freeze
+
 
 class TrainingsController < ApplicationController
   before_action :set_training, only: [:show, :edit, :update, :destroy]
